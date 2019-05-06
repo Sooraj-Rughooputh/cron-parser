@@ -25,9 +25,12 @@ try {
     $app = (new App\cronExpressionParserFactory())->create($expression);
 
     $climate->to('out')->green($app->parse());
+    $climate->out(PHP_EOL);
 } catch (Throwable $e) {
     $climate->to('error')->red($e->getMessage() . PHP_EOL);
     $climate->usage();
+    $climate->out(PHP_EOL);
+    exit(1);
 }
 
-$climate->out(PHP_EOL);
+exit(0);
