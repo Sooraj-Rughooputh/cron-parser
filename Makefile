@@ -20,5 +20,8 @@ bash:
 
 up: build install
 
-test:
+tests-unit:
 	@$(docker_sh) php vendor/bin/codecept run unit
+
+tests-integration:
+	@$(docker_sh) php vendor/bin/codecept run integration
