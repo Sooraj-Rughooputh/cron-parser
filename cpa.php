@@ -21,7 +21,12 @@ if ($climate->arguments->defined('help') || empty($expression)) {
     exit;
 }
 
-$app = new App\cronExpressionParser($expression);
+try {
+    $app = new App\cronExpressionParser($expression);
 
-echo $app->parse();
+    $climate->to('out')->green($app->parse());
+} catch (Throwable $e) {
+    $climate->to('error')->red($e->getMessage() . PHP_EOL);
+    $climate->usage();
+}
 echo PHP_EOL;

@@ -3,16 +3,20 @@
 namespace App;
 
 use Src\CronTokeniser;
+use Src\Parser\standardFactory as ParserFactory;
 use Src\CronTokenParser;
 use Src\CronFormatter;
 
 class cronExpressionParser
 {
+
     private $tokeniser;
+    private $parserFactory;
 
     public function __construct($expression)
     {
         $this->tokeniser = new CronTokeniser($expression);
+        $this->parserFactory = new ParserFactory();
         $this->setUpRanges();
     }
 
@@ -20,19 +24,19 @@ class cronExpressionParser
     {
         $formatter = new CronFormatter();
 
-        $minutesParser = new CronTokenParser($this->tokeniser->getMinute(), $this->minuteRange);
+        $minutesParser = $this->parserFactory->create($this->tokeniser->getMinute(), $this->minuteRange);
         $formatter->addLine('minute', $minutesParser->getValues());
 
-        $hourParser = new CronTokenParser($this->tokeniser->getHour(), $this->hourRange);
+        $hourParser = $this->parserFactory->create($this->tokeniser->getHour(), $this->hourRange);
         $formatter->addLine('hour', $hourParser->getValues());
 
-        $dayOfMonthParser = new CronTokenParser($this->tokeniser->getDayOfMonth(), $this->dayOfMonthRange);
+        $dayOfMonthParser = $this->parserFactory->create($this->tokeniser->getDayOfMonth(), $this->dayOfMonthRange);
         $formatter->addLine('day of month', $dayOfMonthParser->getValues());
 
-        $monthParser = new CronTokenParser($this->tokeniser->getMonth(), $this->monthRange);
+        $monthParser = $this->parserFactory->create($this->tokeniser->getMonth(), $this->monthRange);
         $formatter->addLine('month', $monthParser->getValues());
 
-        $dayOfWeekParser = new CronTokenParser($this->tokeniser->getDayOfWeek(), $this->dayOfWeekRange);
+        $dayOfWeekParser = $this->parserFactory->create($this->tokeniser->getDayOfWeek(), $this->dayOfWeekRange);
         $formatter->addLine('day of week', $dayOfWeekParser->getValues());
 
         $formatter->addLine('command', $this->tokeniser->getCommand());
