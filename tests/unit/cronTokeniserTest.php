@@ -41,4 +41,14 @@ class cronTokeniserTest extends \Codeception\Test\Unit
         $this->assertSame('/usr/bin/bash', $command);
 
     }
+
+    public function testTokeniseCronExpressionReturnsTokenisedExpression()
+    {
+        $commandExpression = uniqid();
+        $expression = "*/15 0 1,15 * 1-5 " . $commandExpression;
+        $tokeniser = new CronTokeniser($expression);
+
+        $command = $tokeniser->getCommand();
+        $this->assertSame($commandExpression , $command);
+    }
 }
