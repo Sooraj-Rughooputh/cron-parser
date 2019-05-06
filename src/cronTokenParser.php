@@ -32,6 +32,8 @@ class CronTokenParser
         foreach ($this->tokens ?? [] as $token) {
             $this->values = array_merge($this->values, $this->parseTokenToValues($token));
         }
+
+        sort($this->values, SORT_NUMERIC);
     }
 
     private function parseTokenToValues($token)

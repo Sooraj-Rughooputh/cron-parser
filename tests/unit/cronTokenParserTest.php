@@ -40,4 +40,15 @@ class cronTokenParserTest extends \Codeception\Test\Unit
         $this->assertSame($expectedResult, $parser->getValues());
     }
 
+    public function testParserRecognisesACommaSeparatedListOfDifferentTypesOfValues()
+    {
+        $token = "*/12,3-9,37,52,56-58";
+        $validRange = range(0, 59);
+        $expectedResult = [0,3,4,5,6,7,8,9,12,24,36,37,48,52,56,57,58];
+
+        $parser = new CronTokenParser($token, $validRange);
+
+        $this->assertSame($expectedResult, $parser->getValues());
+    }
+
 }
