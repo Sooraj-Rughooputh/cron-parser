@@ -51,4 +51,12 @@ class cronTokeniserTest extends \Codeception\Test\Unit
         $command = $tokeniser->getCommand();
         $this->assertSame($commandExpression , $command);
     }
+
+    public function testTokeniserThrowsExceptionWhenGivenInvalidNumberOfArgumentsInExpression()
+    {
+        $expression = "1 2 3 4 /usr/bin/find";
+
+        $this->expectException(\Exception::class);
+        $tokeniser = new CronTokeniser($expression);
+    }
 }

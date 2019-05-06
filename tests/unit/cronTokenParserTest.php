@@ -1,6 +1,7 @@
 <?php
 
-use Src\CronTokenParser;
+use Src\Parser\factory;
+use Src\Parser\standardFactory;
 
 class cronTokenParserTest extends \Codeception\Test\Unit
 {
@@ -9,9 +10,17 @@ class cronTokenParserTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
+    private $factory;
+
+    public function __construct()
+    {
+        $this->factory = new standardFactory();
+
+        return parent::__construct();
+    }
+
     protected function _before()
     {
-
     }
 
     protected function _after()
@@ -24,7 +33,7 @@ class cronTokenParserTest extends \Codeception\Test\Unit
         $token = "1,15";
         $validRange = range(1, 31);
 
-        $parser = new CronTokenParser($token, $validRange);
+        $parser = $this->factory->create($token, $validRange);
 
         $this->assertSame([1,15], $parser->getValues());
     }
@@ -35,7 +44,7 @@ class cronTokenParserTest extends \Codeception\Test\Unit
         $validRange = range(1, 31);
         $expectedResult = [5,10,15,20,25,30];
 
-        $parser = new CronTokenParser($token, $validRange);
+        $parser = $this->factory->create($token, $validRange);
 
         $this->assertSame($expectedResult, $parser->getValues());
     }
@@ -46,7 +55,7 @@ class cronTokenParserTest extends \Codeception\Test\Unit
         $validRange = range(0, 59);
         $expectedResult = [0,3,4,5,6,7,8,9,12,24,36,37,48,52,56,57,58];
 
-        $parser = new CronTokenParser($token, $validRange);
+        $parser = $this->factory->create($token, $validRange);
 
         $this->assertSame($expectedResult, $parser->getValues());
     }
@@ -57,7 +66,7 @@ class cronTokenParserTest extends \Codeception\Test\Unit
         $validRange = range(1, 7);
         $expectedResult = [1,2,3,4,5,6,7];
 
-        $parser = new CronTokenParser($token, $validRange);
+        $parser = $this->factory->create($token, $validRange);
 
         $this->assertSame($expectedResult, $parser->getValues());
     }
@@ -68,7 +77,7 @@ class cronTokenParserTest extends \Codeception\Test\Unit
         $validRange = range(0, 6);
         $expectedResult = [1,3,4,5];
 
-        $parser = new CronTokenParser($token, $validRange);
+        $parser = $this->factory->create($token, $validRange);
 
         $this->assertSame($expectedResult, $parser->getValues());
     }

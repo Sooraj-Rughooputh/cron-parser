@@ -1,8 +1,8 @@
 <?php
 
-namespace Src;
+namespace Src\Parser;
 
-class CronTokenParser
+class standard implements parser
 {
     private $tokens = [];
     private $validRange = [];
