@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/local/bin/php
 <?php
 
 require_once("vendor/autoload.php");
@@ -14,7 +14,7 @@ if (!empty($config['arguments'])) {
 
 $expression = $climate->arguments->get('cron-expression');
 
-echo "CPA: Cron Parser Addresser" . PHP_EOL . PHP_EOL;
+$climate->out("CPA: Cron Parser Addresser" . PHP_EOL);
 
 if ($climate->arguments->defined('help') || empty($expression)) {
     $climate->usage();
@@ -29,4 +29,5 @@ try {
     $climate->to('error')->red($e->getMessage() . PHP_EOL);
     $climate->usage();
 }
-echo PHP_EOL;
+
+$climate->out(PHP_EOL);

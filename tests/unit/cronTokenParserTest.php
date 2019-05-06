@@ -82,4 +82,15 @@ class cronTokenParserTest extends \Codeception\Test\Unit
         $this->assertSame($expectedResult, $parser->getValues());
     }
 
+    public function testParserHandlesOverlappingRangesForSameToken()
+    {
+        $token = "*/5,*/7,1-3,2-4,16,16";
+        $validRange = range(1, 39);
+        $expectedResult = [1,2,3,4,5,7,10,14,15,16,20,21,25,28,30,35];
+
+        $parser = $this->factory->create($token, $validRange);
+
+        $this->assertSame($expectedResult, $parser->getValues());
+    }
+
 }

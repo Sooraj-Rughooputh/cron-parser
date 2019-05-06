@@ -40,7 +40,7 @@ class standard implements parser
     private function parseTokensToValues()
     {
         foreach ($this->tokens ?? [] as $token) {
-            $this->values = array_merge($this->values, $this->parseTokenToValues($token));
+            $this->values = static::arrayCombine($this->values, $this->parseTokenToValues($token));
         }
 
         sort($this->values, SORT_NUMERIC);
@@ -48,7 +48,7 @@ class standard implements parser
 
     private function parseTokenToValues($token)
     {
-        return array_merge(
+        return static::arrayCombine(
           $this->parseLoneWildcardTokenValues($token),
           $this->parseWildcardTokenToValues($token),
           $this->parseRangeTokenToValues($token),
@@ -115,6 +115,22 @@ class standard implements parser
         }
 
         return $this->validRange;
+    }
+
+    private static function arrayCombine(array $firstArray)
+    {
+        $mergedArray = [];
+
+        foreach (func_get_args() ?? [] as $arg) {
+            $mergedArray = array_merge($mergedArray, $arg);
+        }
+
+        $uniqueValues = array_unique($mergedArray);
+        $flippedArray = array_flip($uniqueValues);
+        $uniqueKeys = array_keys($flippedArray);
+        sort($uniqueKeys, SORT_NUMERIC);
+
+        return $uniqueKeys;
     }
 
 }

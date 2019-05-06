@@ -13,7 +13,11 @@ class CronFormatter
 
     public function output()
     {
-        return implode(PHP_EOL, $this->lines);
+        $output = implode(PHP_EOL, $this->lines);
+
+        $this->reset();
+
+        return $output;
     }
 
     private function renderLine($heading, $data)
@@ -33,5 +37,10 @@ class CronFormatter
     private function renderHeading($heading)
     {
         return $heading . str_repeat(' ', 14 - strlen($heading));
+    }
+
+    private function reset()
+    {
+        $this->lines = [];
     }
 }

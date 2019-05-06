@@ -65,8 +65,6 @@ class cronFormatterTest extends \Codeception\Test\Unit
 
         $formatter->addLine($heading, $arrayOfNumbers);
 
-        $this->assertSame($expectedOutput, $formatter->output());
-
         $arrayOfNumbers = [0, 3, 6, 9, 12, 15, 18, 21];
         $heading = 'hour';
         $expectedOutput .= PHP_EOL . $heading . str_repeat(' ', 14 - strlen($heading)) . '0 3 6 9 12 15 18 21';
@@ -83,6 +81,26 @@ class cronFormatterTest extends \Codeception\Test\Unit
         $expectedOutput = $heading . str_repeat(' ', 14 - strlen($heading)) . '/usr/bin/find';
 
         $formatter = new CronFormatter();
+
+        $formatter->addLine($heading, $command);
+
+        $this->assertSame($expectedOutput, $formatter->output());
+    }
+
+    public function testFormatterResetsForReuseAfterOutput()
+    {
+        $arrayOfNumbers = [0, 15, 30, 45];
+        $heading = 'minute';
+
+        $formatter = new CronFormatter();
+
+        $formatter->addLine($heading, $arrayOfNumbers);
+
+        $formatter->output();
+
+        $command = '/usr/bin/find';
+        $heading = 'command';
+        $expectedOutput = $heading . str_repeat(' ', 14 - strlen($heading)) . '/usr/bin/find';
 
         $formatter->addLine($heading, $command);
 
