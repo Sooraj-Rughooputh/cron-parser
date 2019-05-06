@@ -46,6 +46,6 @@ class cronExpressionParser
         $this->hourRange = range(0, 23);
         $this->dayOfMonthRange = range(0, 31);
         $this->monthRange = range(1, 12);
-        $this->dayOfWeekRange = range(1,5);
+        $this->dayOfWeekRange = range(0,6);
     }
 }

@@ -62,4 +62,15 @@ class cronTokenParserTest extends \Codeception\Test\Unit
         $this->assertSame($expectedResult, $parser->getValues());
     }
 
+    public function testParserUnderstandsWeekdays()
+    {
+        $token = "MON,WED-FRI";
+        $validRange = range(0, 6);
+        $expectedResult = [1,3,4,5];
+
+        $parser = new CronTokenParser($token, $validRange);
+
+        $this->assertSame($expectedResult, $parser->getValues());
+    }
+
 }

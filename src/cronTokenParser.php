@@ -11,7 +11,7 @@ class CronTokenParser
 
     public function __construct($token, $validRange)
     {
-        $this->tokens = $this->splitToken($token);
+        $this->storeTokens($this->splitToken($token));
         $this->validRange = $validRange;
 
         $this->parseTokensToValues();
@@ -20,6 +20,16 @@ class CronTokenParser
     public function getValues()
     {
         return $this->values;
+    }
+
+    private function storeTokens($tokens)
+    {
+        $patterns = ['/SUN/', '/MON/', '/TUE/', '/WED/', '/THU/', '/FRI/', '/SAT/'];
+        $replacements = ['0', '1', '2', '3', '4', '5', '6'];
+
+        foreach ($tokens as $token) {
+            $this->tokens[] = preg_replace ($patterns, $replacements, $token);
+        }
     }
 
     private function splitToken($token)
