@@ -11,14 +11,14 @@ install:
 
 shell:
 	@$(docker_sh_c) "export COLUMNS=`tput cols`; export LINES=`tput lines`; exec bash"
-	
+
 run_app:
-	@$(docker_sh_c) "echo $(cron)"
+	@$(docker_sh_c) "./cpa.php \"$(cron)\""
+
+bash:
+	@$(docker_sh) bash
 
 up: build install
 
 test:
-	# you need to implement this
-	echo "not implemented"
-
-.PHONY: build install shell up test
+	@$(docker_sh) php vendor/bin/codecept run unit
