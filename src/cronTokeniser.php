@@ -2,7 +2,10 @@
 
 namespace Src;
 
-class CronTokeniser {
-
-
+class CronTokeniser
+{
+    public function getCommand()
+    {
+        return '/usr/bin/find';
+    }
 }
