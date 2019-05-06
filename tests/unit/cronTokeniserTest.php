@@ -1,5 +1,7 @@
 <?php
 
+use Src\CronTokeniser;
+
 class cronTokeniserTest extends \Codeception\Test\Unit
 {
     /**
@@ -16,8 +18,8 @@ class cronTokeniserTest extends \Codeception\Test\Unit
     }
 
     // tests
-    public function testSomeFeature()
+    public function testClassCanBeCreated()
     {
-
+        $tokeniser = new CronTokeniser();
     }
 }
