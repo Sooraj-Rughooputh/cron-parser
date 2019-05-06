@@ -1,0 +1,9 @@
+version: '2.1'
+
+services:
+  shell:
+    container_name: shell
+    build: .
+    command: tail -f /dev/null
+    volumes:
+      - ./:/app
