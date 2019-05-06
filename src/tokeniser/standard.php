@@ -1,12 +1,11 @@
 <?php
 
-namespace Src;
+namespace Src\Tokeniser;
 
 use Exception;
 
-class CronTokeniser
+class standard implements tokeniser
 {
-
     private $expression;
 
     private $tokenMinute;

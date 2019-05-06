@@ -22,7 +22,7 @@ if ($climate->arguments->defined('help') || empty($expression)) {
 }
 
 try {
-    $app = new App\cronExpressionParser($expression);
+    $app = (new App\cronExpressionParserFactory())->create($expression);
 
     $climate->to('out')->green($app->parse());
 } catch (Throwable $e) {

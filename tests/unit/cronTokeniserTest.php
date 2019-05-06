@@ -1,6 +1,6 @@
 <?php
 
-use Src\CronTokeniser;
+use Src\Tokeniser\standard as CronTokeniser;
 
 class cronTokeniserTest extends \Codeception\Test\Unit
 {
@@ -18,6 +18,7 @@ class cronTokeniserTest extends \Codeception\Test\Unit
     {
     }
 
+    // tests
     public function testClassCanBeCreated()
     {
         $tokeniser = new CronTokeniser();
@@ -52,6 +53,28 @@ class cronTokeniserTest extends \Codeception\Test\Unit
         $this->assertSame($commandExpression , $command);
     }
 
+
+    public function testTokeniseCronExpressionReturnsAllTokenisedItems()
+    {
+        $minuteExpression = uniqid();
+        $hourExpression = uniqid();
+        $dayOfMonthExpression = uniqid();
+        $monthExpression = uniqid();
+        $dayOfWeekExpression = uniqid();
+        $commandExpression = uniqid();
+        $expression = implode(" ", [$minuteExpression, $hourExpression, $dayOfMonthExpression, $monthExpression, $dayOfWeekExpression, $commandExpression]);
+
+        $tokeniser = new CronTokeniser($expression);
+
+        $command = $tokeniser->getCommand();
+        $this->assertSame($minuteExpression , $tokeniser->getMinute());
+        $this->assertSame($hourExpression , $tokeniser->getHour());
+        $this->assertSame($dayOfMonthExpression , $tokeniser->getDayOfMonth());
+        $this->assertSame($monthExpression , $tokeniser->getMonth());
+        $this->assertSame($dayOfWeekExpression , $tokeniser->getDayOfWeek());
+        $this->assertSame($commandExpression , $tokeniser->getCommand());
+    }
+
     public function testTokeniserThrowsExceptionWhenGivenInvalidNumberOfArgumentsInExpression()
     {
         $expression = "1 2 3 4 /usr/bin/find";
@@ -59,4 +82,5 @@ class cronTokeniserTest extends \Codeception\Test\Unit
         $this->expectException(\Exception::class);
         $tokeniser = new CronTokeniser($expression);
     }
+
 }
