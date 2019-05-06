@@ -4,6 +4,8 @@ namespace Src;
 
 class CronFormatter
 {
+    const HEADING_COLUMN_WIDTH = 15;
+
     private $lines = [];
 
     public function addLine($heading, $data)
@@ -36,7 +38,7 @@ class CronFormatter
 
     private function renderHeading($heading)
     {
-        return $heading . str_repeat(' ', 14 - strlen($heading));
+        return $heading . str_repeat(' ', static::HEADING_COLUMN_WIDTH - strlen($heading));
     }
 
     private function reset()
