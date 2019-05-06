@@ -11,15 +11,24 @@ class cronTokeniserTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
+
     }
 
     protected function _after()
     {
     }
 
-    // tests
     public function testClassCanBeCreated()
     {
         $tokeniser = new CronTokeniser();
+    }
+
+    public function testTokeniseCronExpression()
+    {
+        $expression = "*/15 0 1,15 * 1-5 /usr/bin/find";
+        $tokeniser = new CronTokeniser($expression);
+
+        $command = $tokeniser->getCommand();
+        $this->assertSame('/usr/bin/find', $command);
     }
 }
