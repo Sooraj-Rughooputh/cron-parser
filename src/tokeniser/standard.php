@@ -30,12 +30,12 @@ class standard implements tokeniser
         if (count($tokens) < 6) {
             throw new Exception("Invalid number of elements in cron expression. Expecting 6 space separated sections.");
         }
-        $this->tokenMinute = $tokens[0];
-        $this->tokenHour = $tokens[1];
-        $this->tokenDayOfMonth = $tokens[2];
-        $this->tokenMonth = $tokens[3];
-        $this->tokenDayOfWeek = $tokens[4];
-        $this->tokenCommand = $tokens[5];
+        $this->tokenMinute = array_shift($tokens);
+        $this->tokenHour = array_shift($tokens);
+        $this->tokenDayOfMonth = array_shift($tokens);
+        $this->tokenMonth = array_shift($tokens);
+        $this->tokenDayOfWeek = array_shift($tokens);
+        $this->tokenCommand = implode(" ", $tokens);
     }
 
     public function getMinute()

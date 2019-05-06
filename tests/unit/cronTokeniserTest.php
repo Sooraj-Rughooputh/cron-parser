@@ -83,4 +83,14 @@ class cronTokeniserTest extends \Codeception\Test\Unit
         $tokeniser = new CronTokeniser($expression);
     }
 
+    public function testTokeniseCronExpressionReturnsCommandWithAssociatedArguments()
+    {
+        $commandExpression = '/usr/bin/php cpa.php "*/15 0 1,15 * 1-5 cmd"';
+        $expression = "*/15 0 1,15 * 1-5 " . $commandExpression;
+        $tokeniser = new CronTokeniser($expression);
+
+        $command = $tokeniser->getCommand();
+
+        $this->assertSame($commandExpression , $command);
+    }
 }
