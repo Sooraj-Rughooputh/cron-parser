@@ -6,9 +6,9 @@ class CronFormatter
 {
     private $lines = [];
 
-    public function addLine($heading, $numbers)
+    public function addLine($heading, $data)
     {
-        $this->lines[] = $this->renderLine($heading, $numbers);
+        $this->lines[] = $this->renderLine($heading, $data);
     }
 
     public function output()
@@ -16,12 +16,22 @@ class CronFormatter
         return implode(PHP_EOL, $this->lines);
     }
 
-    private function renderLine($heading, $numbers)
+    private function renderLine($heading, $data)
     {
-        $line = $heading;
-        $line .= str_repeat(' ', 14 - strlen($heading));
-        $line .= implode(' ', $numbers);
+        return $this->renderHeading($heading) . $this->renderData($data);
+    }
 
-        return $line;
+    private function renderData($data)
+    {
+        if (is_array($data)) {
+            return implode(' ', $data);
+        }
+
+        return $data;
+    }
+
+    private function renderHeading($heading)
+    {
+        return $heading . str_repeat(' ', 14 - strlen($heading));
     }
 }

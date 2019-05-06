@@ -76,4 +76,17 @@ class cronFormatterTest extends \Codeception\Test\Unit
         $this->assertSame($expectedOutput, $formatter->output());
     }
 
+    public function testFormatterHandlesLineContainingCommand()
+    {
+        $command = '/usr/bin/find';
+        $heading = 'command';
+        $expectedOutput = $heading . str_repeat(' ', 14 - strlen($heading)) . '/usr/bin/find';
+
+        $formatter = new CronFormatter();
+
+        $formatter->addLine($heading, $command);
+
+        $this->assertSame($expectedOutput, $formatter->output());
+    }
+
 }
