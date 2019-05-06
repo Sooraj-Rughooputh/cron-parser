@@ -28,7 +28,7 @@ class cronFormatterTest extends \Codeception\Test\Unit
     {
         $arrayOfNumbers = [0, 15, 30, 45];
         $heading = 'minute';
-        $expectedOutput = $heading . str_repeat(' ', 14 - strlen($heading)) . '0 15 30 45';
+        $expectedOutput = $heading . str_repeat(' ', 15 - strlen($heading)) . '0 15 30 45';
 
         $formatter = new CronFormatter();
 
@@ -44,7 +44,7 @@ class cronFormatterTest extends \Codeception\Test\Unit
     {
         $arrayOfNumbers = [0, 3, 6, 9, 12, 15, 18, 21];
         $heading = 'hour';
-        $expectedOutput = $heading . str_repeat(' ', 14 - strlen($heading)) . '0 3 6 9 12 15 18 21';
+        $expectedOutput = $heading . str_repeat(' ', 15 - strlen($heading)) . '0 3 6 9 12 15 18 21';
 
         $formatter = new CronFormatter();
 
@@ -59,7 +59,7 @@ class cronFormatterTest extends \Codeception\Test\Unit
     {
         $arrayOfNumbers = [0, 15, 30, 45];
         $heading = 'minute';
-        $expectedOutput = $heading . str_repeat(' ', 14 - strlen($heading)) . '0 15 30 45';
+        $expectedOutput = $heading . str_repeat(' ', 15 - strlen($heading)) . '0 15 30 45';
 
         $formatter = new CronFormatter();
 
@@ -67,7 +67,7 @@ class cronFormatterTest extends \Codeception\Test\Unit
 
         $arrayOfNumbers = [0, 3, 6, 9, 12, 15, 18, 21];
         $heading = 'hour';
-        $expectedOutput .= PHP_EOL . $heading . str_repeat(' ', 14 - strlen($heading)) . '0 3 6 9 12 15 18 21';
+        $expectedOutput .= PHP_EOL . $heading . str_repeat(' ', 15 - strlen($heading)) . '0 3 6 9 12 15 18 21';
 
         $formatter->addLine($heading, $arrayOfNumbers);
 
@@ -78,7 +78,7 @@ class cronFormatterTest extends \Codeception\Test\Unit
     {
         $command = '/usr/bin/find';
         $heading = 'command';
-        $expectedOutput = $heading . str_repeat(' ', 14 - strlen($heading)) . '/usr/bin/find';
+        $expectedOutput = $heading . str_repeat(' ', 15 - strlen($heading)) . '/usr/bin/find';
 
         $formatter = new CronFormatter();
 
@@ -91,6 +91,7 @@ class cronFormatterTest extends \Codeception\Test\Unit
     {
         $arrayOfNumbers = [0, 15, 30, 45];
         $heading = 'minute';
+        $headingWidth = 15;
 
         $formatter = new CronFormatter();
 
@@ -100,7 +101,7 @@ class cronFormatterTest extends \Codeception\Test\Unit
 
         $command = '/usr/bin/find';
         $heading = 'command';
-        $expectedOutput = $heading . str_repeat(' ', 14 - strlen($heading)) . '/usr/bin/find';
+        $expectedOutput = $heading . str_repeat(' ', $headingWidth - strlen($heading)) . '/usr/bin/find';
 
         $formatter->addLine($heading, $command);
 
