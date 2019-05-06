@@ -4,16 +4,24 @@ namespace Src;
 
 class CronFormatter
 {
-    public function addLine($heading, $arrayOfNumbers)
-    {
-        $heading = 'mintue';
-        $arrayOfNumbers = '0 15 30 45';
-        return true;
+    private $lines = [];
 
+    public function addLine($heading, $numbers)
+    {
+        $this->lines[] = $this->renderLine($heading, $numbers);
     }
 
     public function output()
     {
-        return 'minute           0 15 30 45';
+        return implode(PHP_EOL, $this->lines);
+    }
+
+    private function renderLine($heading, $numbers)
+    {
+        $line = $heading;
+        $line .= str_repeat(' ', 14 - strlen($heading));
+        $line .= implode(' ', $numbers);
+
+        return $line;
     }
 }

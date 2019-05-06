@@ -39,6 +39,7 @@ class CronTokenParser
     private function parseTokenToValues($token)
     {
         return array_merge(
+          $this->parseLoneWildcardTokenValues($token),
           $this->parseWildcardTokenToValues($token),
           $this->parseRangeTokenToValues($token),
           $this->parseBasicTokenToValues($token)
@@ -95,6 +96,15 @@ class CronTokenParser
               return $candidateValue == $basicValue;
           }
         );
+    }
+
+    private function parseLoneWildcardTokenValues($token)
+    {
+        if (!preg_match('/^\*$/', $token, $matches)) {
+            return [];
+        }
+
+        return $this->validRange;
     }
 
 }

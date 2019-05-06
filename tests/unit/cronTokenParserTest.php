@@ -51,4 +51,15 @@ class cronTokenParserTest extends \Codeception\Test\Unit
         $this->assertSame($expectedResult, $parser->getValues());
     }
 
+    public function testParserCanParseAsteriskExpression()
+    {
+        $token = "*";
+        $validRange = range(1, 7);
+        $expectedResult = [1,2,3,4,5,6,7];
+
+        $parser = new CronTokenParser($token, $validRange);
+
+        $this->assertSame($expectedResult, $parser->getValues());
+    }
+
 }
