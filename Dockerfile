@@ -1,4 +1,4 @@
-FROM php:7.3-cli
+FROM php:7.2-cli
 MAINTAINER Sooraj Rughooputh <soorajrug@googlemail.com>
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"

@@ -13,7 +13,7 @@ This was an exercise to familiarise myself with TDD approaches and understand ho
 - Basic knowledge of Docker.
 
 ## Versions:
-- PHP ^7.3
+- PHP ^7.2
 
 ## Getting Started
 
