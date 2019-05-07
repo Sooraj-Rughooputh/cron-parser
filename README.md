@@ -1,5 +1,12 @@
 <p align="center">Cron Parser</p>
 
+## What
+Cron parser is a command line app that can explains/simplify the cron that is given. 
+
+## Why 
+I built the cron parser in php using TDD  (Test-driven development)
+This was an exercise to familiarise myself with TDD approaches and understand how it works. 
+
 ## Pre-requisites
 
 - Docker running on the host machine.
