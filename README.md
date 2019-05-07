@@ -22,9 +22,9 @@ Once built you can run:
 
 ## Examples
 
-make run_app cron="*/15 0 1,15 * 1-5 /usr/bin/find"
-make run_app cron="0 0,12 1 */2 * /usr/bin/find"
-make run_app cron="0 4,17 * * sun,mon /scripts/script.sh"
+- make run_app cron="*/15 0 1,15 * 1-5 /usr/bin/find"
+- make run_app cron="0 0,12 1 */2 * /usr/bin/find"
+- make run_app cron="0 4,17 * * sun,mon /scripts/script.sh"
 
 ## Makefile
 The Makefile provides few convenient and useful commands:
